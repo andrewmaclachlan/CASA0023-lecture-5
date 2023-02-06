@@ -117,9 +117,36 @@ xaringanExtra::use_logo(
 ---
 # Lecture outline
 
+
+### Part 1: The set up of GEE
+
 .pull-left[
 
-### Part 2: GEE in action
+* Terms / jargon specific to GEE
+
+* Relating spatial data formats we have seen to GEE
+
+* Client vs server side
+
+* Scale (resolution) 
+
+* Projections
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('img/satellite.png')
+```
+.small[Source:[Original from the British Library. Digitally enhanced by rawpixel.](https://www.rawpixel.com/image/571789/solar-generator-vintage-style)
+]]
+
+---
+# Lecture outline (part 2)
+
+
+### Part 2: GEE in action (how we use it)
+
+.pull-left[
 
 * How we use Google Earth Engine
 
@@ -142,24 +169,8 @@ xaringanExtra::use_logo(
 knitr::include_graphics('img/satellite.png')
 ```
 .small[Source:[Original from the British Library. Digitally enhanced by rawpixel.](https://www.rawpixel.com/image/571789/solar-generator-vintage-style)
-]]
-
----
-# Lecture outline
-
-
-### Part 2: GEE in action (how we use it)
-
-* How we use it
-
 ]
-
-.pull-right[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('img/satellite.png')
-```
-.small[Source:[Original from the British Library. Digitally enhanced by rawpixel.](https://www.rawpixel.com/image/571789/solar-generator-vintage-style)
-]]
+]
 
 ---
 class: inverse, center, middle
@@ -1146,6 +1157,7 @@ And finally spatially subset
 class: center, middle
 
 # Machine learning (we cover this next week)
+
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WvaBZbph_cU?start=152" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
