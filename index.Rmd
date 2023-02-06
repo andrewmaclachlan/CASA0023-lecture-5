@@ -151,6 +151,8 @@ class: inverse, center, middle
 
 * "Geospatial" processing service
   * recall week 1 of CASA0005!
+  * Geo = Earth's surface (and near surface)
+  * Spatial = Any space (not necessarily geographic)
 
 * It permits geospatial analysis **at scale**
 
@@ -197,6 +199,7 @@ A stack of images (remember from R) is also called something new:
 ```{r echo=FALSE, out.width='100%', fig.align='center'}
 knitr::include_graphics('img/image_collection.png')
 ```
+.small[[Example of loading data quickly](https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC09_C02_T1_L2)]
 
 ]
 
@@ -210,7 +213,7 @@ knitr::include_graphics('img/image_collection.png')
 * You will see some similarities to python and R but there are some notable differences 
 
   * Variables (or objects) as defined with `var`..
-  * The a specific part of your code ends with a `;`
+  * A specific part of your code ends with a `;`
   * Objects are dictionaries in Javascript...
   
 ```{r, eval=FALSE}
@@ -242,7 +245,10 @@ print('Print foo:', object['foo']);
   
 In GEE we have **Earth Engine Objects** = starting with `ee`, for example...
 
-`ee.ImageCollection("LANDSAT/LC09/C02/T1_L2")`
+```{r, eval=FALSE}
+ee.ImageCollection("LANDSAT/LC09/C02/T1_L2")
+
+```
 
 ]
 
@@ -315,6 +321,72 @@ knitr::include_graphics('img/data_explorer.jpg')
   
 ---
 
+# Loop vs Map...an example
+
+.pull-left[
+
+**Loop**
+
+* Run some code on each element in an array
+
+* Save it in a new array (or update existing)
+
+```{r, eval=FALSE}
+names = ['andrew', 'james', 'crites']
+
+# manually
+capitalize(names[0])
+capitalize(names[1])
+capitalize(names[2])
+
+#loop
+x = 0;
+for x < names.length:
+  capitalize(names[x])
+  x = x + 1
+```
+
+]
+
+
+.pull-right[
+
+**Map**
+
+* Code is applied to each element
+
+* But...the conditions are dealt with
+  * No indexing at the end!
+
+```{r, eval=FALSE}
+
+# map
+names.map(name => capitalize(name))
+
+```
+
+OR
+
+```{r, eval=FALSE}
+names.map(capitalize)
+```
+
+]
+
+
+.small[map vs. for loop. Source: [Andrew Crites](https://medium.com/@ExplosionPills/map-vs-for-loop-2b4ce659fb03)
+]
+
+---
+# Why map in GEE?
+
+* Otherwise you might load the complete image collection many, many times when looping
+
+* The loop doesn't know what is inside the collection
+
+* Mapping lets GEE allocate the the processing to different machines with map. I assume as it knows how many images we have and the function it must apply...With a loop it doesn't know until the next interation...
+
+---
 
 class: inverse, center, middle
 
@@ -337,6 +409,8 @@ class: inverse, center, middle
   * GEE aggregates the image to fit a 256x256 grid
   * Earth Engine selects the pyramid with the closest scale to that of your analysis (or specified by it) and resamples as needed
   * resampling uses nearest neighbor by default
+  
+For example... the zoom level of the map can dictate the scale used...  
 
 **Set your scale**
 
@@ -863,23 +937,24 @@ This is still considered a **reducer** as we are reducing all of the data to two
 # Linear regression 2
 
 ```{r, eval=FALSE}
-// Define a region in the redwood forest.
-var redwoods = ee.Geometry.Rectangle(-124.0665, 41.0739, -123.934, 41.2029);
+// This function adds a time band to the image.
+var createTimeBand = function(image) {
+  // Scale milliseconds by a large constant to avoid very small slopes
+  // in the linear regression output.
+  return image.addBands(image.metadata('system:time_start').divide(1e18));
+};
 
-// Load input NAIP imagery and build a mosaic.
-var naipCollection = ee.ImageCollection('USDA/NAIP/DOQQ')
-  .filterBounds(redwoods)
-  .filterDate('2012-01-01', '2012-12-31');
-var naip = naipCollection.mosaic();
+// Load the input image collection: projected climate data.
+var collection = ee.ImageCollection('NASA/NEX-DCP30_ENSEMBLE_STATS')
+  .filter(ee.Filter.eq('scenario', 'rcp85'))
+  .filterDate(ee.Date('2006-01-01'), ee.Date('2050-01-01'))
+  // Map the time band function over the collection.
+  .map(createTimeBand);
 
-// Compute NDVI from the NAIP imagery.
-var naipNDVI = naip.normalizedDifference(['N', 'R']);
-
-// Compute standard deviation (SD) as texture of the NDVI.
-var texture = naipNDVI.reduceNeighborhood({
-  reducer: ee.Reducer.stdDev(),
-  kernel: ee.Kernel.circle(7),
-});
+// Reduce the collection with the linear fit reducer.
+// Independent variable are followed by dependent variables.
+var linearFit = collection.select(['system:time_start', 'pr_mean'])
+  .reduce(ee.Reducer.linearFit());
 
 ```
 
@@ -1033,8 +1108,14 @@ class: center, middle
 
 # Machine learning
 
+* We cover this in the next two week, including:
+  * Objected based image analysis
+  * Sub pixel analysis (or "mixels" = mixed pixels)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WvaBZbph_cU?start=152" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+---
+# Summary 
 
 
 ```{r include=FALSE}
