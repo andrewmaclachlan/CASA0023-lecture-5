@@ -33,7 +33,7 @@
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xcd25c5a916a44aa9e18ef1bbcda88ea","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xc251fd746b740a8888170443967c751","expires":1}</script>
     <script src="libs/himalaya/himalaya.js"></script>
     <link href="libs/editable/editable.css" rel="stylesheet" />
     <script src="libs/editable/editable.js"></script>
@@ -167,12 +167,34 @@ top:1em;right:2em;
 
 .pull-left[
 
-### Part 1: The setup of GEE
-
-* 
-
-
 ### Part 2: GEE in action
+
+* How we use Google Earth Engine
+
+* Buildings blocks of data (the data in GEE)
+
+* Collections, geometries and features 
+
+* Reducing images (e.g. zonal statistics)
+
+* Regression (over time)
+
+* Joins
+
+* Machine learning (video intro, more in next few weeks)
+
+]
+
+.pull-right[
+&lt;img src="img/satellite.png" width="100%" /&gt;
+.small[Source:[Original from the British Library. Digitally enhanced by rawpixel.](https://www.rawpixel.com/image/571789/solar-generator-vintage-style)
+]]
+
+---
+# Lecture outline
+
+
+### Part 2: GEE in action (how we use it)
 
 * How we use it
 
@@ -186,7 +208,9 @@ top:1em;right:2em;
 ---
 class: inverse, center, middle
 
-# What is Google Earth Engine
+## Part 1: The setup of GEE
+
+## What is Google Earth Engine
 
 
 ---
@@ -211,12 +235,14 @@ class: inverse, center, middle
 
 * Takes the code you have written and applies it for you
 
-* Can be used to make **queryable** online applications 
-  
 ]
 .pull-right[
 
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/gKGOeTFHnKY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+* Can be used to make **queryable** online applications 
+
+
 ]
 ---
 
@@ -554,6 +580,12 @@ class: inverse, center, middle
 
 
 ]
+
+---
+class: inverse, center, middle
+
+## Part 2: GEE in action (how we use it)
+
 ---
 
 # Building blocks of GEE
@@ -907,8 +939,6 @@ var texture = naipNDVI.reduceNeighborhood({
 
 .pull-left[
 
-We will see this **three times** throughout the next few slides...
-
 `$$y_i = \beta_0 + \beta_1x_i + \epsilon_i$$`
 
 where:
@@ -1103,7 +1133,11 @@ In the following code I have added to the GEE example:
 * Select a national park
 * Add all power plants within 100km of the park as a property **to the feature** (Yosemite here)...
 
-[Code](https://code.earthengine.google.com/581dbded03c04d29cff8ec3d39ac3471)
+* The joined attributes are in: Features &gt; properties &gt; points (100 elements)
+
+
+
+[Code](https://code.earthengine.google.com/7424ebd78cf7d634f161a0a0619019ea)
 
 ---
 
@@ -1119,14 +1153,13 @@ And finally spatially subset
 * Select the power plants 
 * Subset power plants within a polygon.
 
+[Code](https://code.earthengine.google.com/7424ebd78cf7d634f161a0a0619019ea)
+
+
 ---
 class: center, middle
 
-# Machine learning
-
-* We cover this in the next two week, including:
-  * Objected based image analysis
-  * Sub pixel analysis (or "mixels" = mixed pixels)
+# Machine learning (we cover this next week)
 
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/WvaBZbph_cU?start=152" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen&gt;&lt;/iframe&gt;
 

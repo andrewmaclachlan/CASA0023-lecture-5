@@ -119,12 +119,36 @@ xaringanExtra::use_logo(
 
 .pull-left[
 
-### Part 1: The setup of GEE
-
-* 
-
-
 ### Part 2: GEE in action
+
+* How we use Google Earth Engine
+
+* Buildings blocks of data (the data in GEE)
+
+* Collections, geometries and features 
+
+* Reducing images (e.g. zonal statistics)
+
+* Regression (over time)
+
+* Joins
+
+* Machine learning (video intro, more in next few weeks)
+
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('img/satellite.png')
+```
+.small[Source:[Original from the British Library. Digitally enhanced by rawpixel.](https://www.rawpixel.com/image/571789/solar-generator-vintage-style)
+]]
+
+---
+# Lecture outline
+
+
+### Part 2: GEE in action (how we use it)
 
 * How we use it
 
@@ -140,7 +164,9 @@ knitr::include_graphics('img/satellite.png')
 ---
 class: inverse, center, middle
 
-# What is Google Earth Engine
+## Part 1: The setup of GEE
+
+## What is Google Earth Engine
 
 
 ---
@@ -165,12 +191,14 @@ class: inverse, center, middle
 
 * Takes the code you have written and applies it for you
 
-* Can be used to make **queryable** online applications 
-  
 ]
 .pull-right[
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gKGOeTFHnKY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+* Can be used to make **queryable** online applications 
+
+
 ]
 ---
 
@@ -514,6 +542,12 @@ knitr::include_graphics('img/Projection.png')
 
 
 ]
+
+---
+class: inverse, center, middle
+
+## Part 2: GEE in action (how we use it)
+
 ---
 
 # Building blocks of GEE
@@ -885,8 +919,6 @@ knitr::include_graphics('img/image_neighbourhood.png')
 
 .pull-left[
 
-We will see this **three times** throughout the next few slides...
-
 $$y_i = \beta_0 + \beta_1x_i + \epsilon_i$$
 
 where:
@@ -1087,7 +1119,11 @@ In the following code I have added to the GEE example:
 * Select a national park
 * Add all power plants within 100km of the park as a property **to the feature** (Yosemite here)...
 
-[Code](https://code.earthengine.google.com/581dbded03c04d29cff8ec3d39ac3471)
+* The joined attributes are in: Features > properties > points (100 elements)
+
+
+
+[Code](https://code.earthengine.google.com/7424ebd78cf7d634f161a0a0619019ea)
 
 ---
 
@@ -1103,14 +1139,13 @@ And finally spatially subset
 * Select the power plants 
 * Subset power plants within a polygon.
 
+[Code](https://code.earthengine.google.com/7424ebd78cf7d634f161a0a0619019ea)
+
+
 ---
 class: center, middle
 
-# Machine learning
-
-* We cover this in the next two week, including:
-  * Objected based image analysis
-  * Sub pixel analysis (or "mixels" = mixed pixels)
+# Machine learning (we cover this next week)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WvaBZbph_cU?start=152" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
