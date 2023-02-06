@@ -1164,8 +1164,21 @@ class: center, middle
 ---
 # Summary 
 
+* How GEE is setup
+  * Raster = image
+  * Collection = several images or polygons
+  * Javascript into
+  * Client vs server side
+  * Loops and Mapping 
+  
+* GEE functions and tools
+  * Loading image collections
+  * Reducing images (by region or regions or neighbourhoods)
+  * Regression
+  * Joins and filtering
+
 
 ```{r include=FALSE}
 library(xaringanBuilder)
-#build_pdf("index.html", complex_slides = TRUE)
+build_pdf("index.html", complex_slides = TRUE)
 ```
